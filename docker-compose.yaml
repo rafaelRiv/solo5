@@ -1,0 +1,13 @@
+services:
+  dev:
+    build: .
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    sysctls: {net.ipv4.ip_forward: "1"}
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    command: ["/workspace/scripts/startup.bash", "sleep", "infinity"]
