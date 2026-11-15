@@ -1,13 +1,12 @@
 {
-  description = "A flake to compile hvt",
-  input = {
+  description = "A flake to compile hvt";
+  inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
-  output = { self, nixpkgs }@input {
+  outputs = { self, nixpkgs }@input:
     let system = "aarch64-darwin"; 
-        pkgs = nixpkgs.legacyPackage.${system};
+        pkgs = nixpkgs.legacyPackages.${system};
     in {
       packages.${system}.default = pkgs.hello;
     };
-  };
 }
