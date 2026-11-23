@@ -33,8 +33,20 @@
             EOF
           '';
         };
+        watch= pkgs.writeShellScriptBin "watch" ''
+            ${pkgs.watchexec}/bin/watchexec \
+              --clear \
+              --watch tenders \
+              --exts c \
+              -- \
+              'nix develop -c "make" && ./tenders/hvt/solo5-hvt'
+        '';
     in {
-      packages.${system}.default = solo5;
+      packages.${system} = {
+        default = solo5;
+        watch = watch;
+      };
+      scripts.${system}.watch = "${self.packages.${system}.watch}/bin/watch";
       devShells.${system}.default = pkgs.mkShell {
         name = "solo5-dev";
         packages = [
