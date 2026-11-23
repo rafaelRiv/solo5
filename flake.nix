@@ -7,7 +7,7 @@
     let system = "aarch64-linux"; 
         pkgs = nixpkgs.legacyPackages.${system};
         solo5 = pkgs.stdenv.mkDerivation rec {
-          name = "Solo 5";
+          name = "Solo5";
           src = ./.;
           nativeBuildInputs = [ pkgs.pkg-config ];
           buildInputs = [

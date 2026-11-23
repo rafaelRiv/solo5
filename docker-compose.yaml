@@ -8,6 +8,9 @@ services:
       - NET_ADMIN
     sysctls: {net.ipv4.ip_forward: "1"}
     working_dir: /workspace
+    volumes:
+      - .:/workspace
     stdin_open: true
     tty: true
     command: ["/workspace/scripts/startup.bash", "sleep", "infinity"]
+
