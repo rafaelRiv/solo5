@@ -139,7 +139,7 @@ static void version(const char *prog)
 
 int main(int argc, char **argv)
 {
-    fprintf(stderr, "Hello World!\n");
+    printf("Hello World!!\n");
 
    /* size_t mem_size = 0x20000000;
     int no_net_ring = 0;
