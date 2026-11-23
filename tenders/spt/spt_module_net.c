@@ -43,6 +43,8 @@ static int handle_cmdarg(char *cmdarg, struct mft *mft)
 {
     enum { opt_net, opt_net_mac } which;
 
+    printf("HELLO WORLD");
+
     if (strncmp("--net:", cmdarg, 6) == 0)
         which = opt_net;
     else if (strncmp("--net-mac:", cmdarg, 10) == 0)

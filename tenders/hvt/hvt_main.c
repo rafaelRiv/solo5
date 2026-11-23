@@ -139,7 +139,9 @@ static void version(const char *prog)
 
 int main(int argc, char **argv)
 {
-    size_t mem_size = 0x20000000;
+    fprintf(stderr, "Hello World!\n");
+
+   /* size_t mem_size = 0x20000000;
     int no_net_ring = 0;
     hvt_gpa_t gpa_ep, gpa_kend;
     const char *prog;
@@ -150,15 +152,10 @@ int main(int argc, char **argv)
     argc--;
     argv++;
 
-    /*
-     * Scan command line arguments, looking for the first non-option argument
-     * which will be the ELF file to load. Stop if a "terminal" option such as
-     * --help is encountered.
-     */
+
     char **argv1 = argv;
     while (*argv1 && *argv1[0] == '-') {
         if (strcmp("--", *argv1) == 0) {
-            /* Consume and stop option processing */
             argv1++;
             break;
         }
@@ -176,12 +173,6 @@ int main(int argc, char **argv)
     }
     elf_filename = *argv1;
 
-    /*
-     * Now that we have the ELF file name, verify that is binary is
-     * ABI-compatible and load the MFT1 NOTE from it, as subsequent parsing of
-     * the command line in the 2nd pass depends on the application-supplied
-     * manifest.
-     */
     elf_fd = open(elf_filename, O_RDONLY);
     if (elf_fd == -1)
         err(1, "%s: Could not open", elf_filename);
@@ -211,13 +202,8 @@ int main(int argc, char **argv)
         errx(1, "%s: Solo5 manifest is invalid", elf_filename);
     }
 
-    /*
-     * Scan command line arguments in a 2nd pass, and pass options through to
-     * modules to handle.
-     */
     while (*argv && *argv[0] == '-') {
         if (strcmp("--", *argv) == 0) {
-            /* Consume and stop option processing */
             argc--;
             argv++;
             break;
@@ -236,7 +222,6 @@ int main(int argc, char **argv)
             continue;
         }
         if (handle_cmdarg(*argv, mft) == 0) {
-            /* Handled by module, consume and go on to next arg */
             argc--;
             argv++;
             continue;
@@ -264,8 +249,7 @@ int main(int argc, char **argv)
         hvt_net_reserve_ring(hvt, mft);
     elf_load(elf_fd, elf_filename, hvt->mem, hvt->guest_mem_size,
              HVT_GUEST_MIN_BASE, hvt_guest_mprotect, hvt, &gpa_ep, &gpa_kend);
-    close(elf_fd); /* Done with ELF binary */
-
+    close(elf_fd); 
     hvt_vcpu_init(hvt, gpa_ep);
 
     setup_modules(hvt, mft);
@@ -280,5 +264,7 @@ int main(int argc, char **argv)
     warnx("WARNING: This is not recommended for production use.");
 #endif
 
-    return hvt_vcpu_loop(hvt);
+    return hvt_vcpu_loop(hvt); */
+
+    return 0;
 }
