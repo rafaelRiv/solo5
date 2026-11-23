@@ -39,7 +39,7 @@
               --watch tenders \
               --exts c \
               -- \
-              'nix develop -c "make" && ./tenders/hvt/solo5-hvt'
+              'nix develop -c "make" && printf "\\033[2J\\033[H" && ./tenders/hvt/solo5-hvt'
         '';
     in {
       packages.${system} = {
