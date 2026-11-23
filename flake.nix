@@ -35,5 +35,15 @@
         };
     in {
       packages.${system}.default = solo5;
+      devShells.${system}.default = pkgs.mkShell {
+        name = "solo5-dev";
+        packages = [
+          pkgs.gcc
+          pkgs.gnumake
+          pkgs.pkg-config
+          pkgs.libseccomp
+          pkgs.git
+        ];
+      };
     };
 }
